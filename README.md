@@ -7,6 +7,8 @@ that may work with module loaders like [RequireJS](http://requirejs.org),
 
 It is known to work with RequireJS 1.0+.
 
+This fork also works with curl.js 0.8.10
+
 This loader plugin makes it easy to write your JS functionality in CoffeeScript,
 and easily use it in the browser, Node or Rhino. Plus, if you use the RequireJS
 optimizer, your CoffeeScript files can be translated to JavaScript, and inlined
