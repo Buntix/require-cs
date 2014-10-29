@@ -13,6 +13,8 @@
 *  http://www.webtoolkit.info/
 *
 **/
+
+(function (global, document, globalEval) {
  
 var Base64 = {
  
@@ -320,7 +322,11 @@ define(['coffee-script'], function (CoffeeScript) {
                     buildMap[name] = text;
                 }
                 
-                load.fromText(name, text);
+                if ('undefined' != typeof(load.fromText)) { // require.js
+                    load.fromText(name, text);
+                } else {                                    // curl.js
+                    globalEval("define('" + name + "', ['require','exports','module'], function(require,exports,module,define){\n" + text + "\n});\n");
+                }
 
                 //Give result to load. Need to wait until the module
                 //is fully parse, which will happen after this
@@ -332,3 +338,5 @@ define(['coffee-script'], function (CoffeeScript) {
         }
     };
 });
+
+}(this, this.document, function () { eval(arguments[0]); }));
